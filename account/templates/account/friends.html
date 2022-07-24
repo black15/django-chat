@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}  Chat With Django {% endblock title %}
+
+{% block content %}
+        <h2>
+                {% if is_self %}
+                <div class="list-users">
+                        {% if friends %}
+                        {% for friend in friends %}
+                                <div class="each-user">
+                                        <a href="{% url 'account:profile' friend.id %}">
+                                                <div class="username"><span>{{friend}}</span></div>
+                                                <div class="profile-img"><img src="{{friend.profile_img.url}}" alt="Profile Image"></div>
+                                        </a>
+                                        <div class="friendship">
+                                                <a href="{% url 'account:remove-friend' friend.id %}"><span class="check-friendship">Remove  <i class="fa-solid fa-x" style="color: red;"></i></span></a><br><br>
+                                                <span class="message-user">Send a message <i class="fa-solid fa-message"></i></span>
+                                        </div>
+                                </div>
+                        {% endfor %}
+
+                        {% elif frequests %}
+                        {% for freq in frequests %}
+                                <div class="each-user">
+                                        <a href="{% url 'account:profile' freq.from_user.id %}">
+                                                <div class="username"><span>{{freq.from_user}}</span></div>
+                                                <div class="profile-img"><img src="{{freq.from_user.profile_img.url}}" alt="Profile Image"></div>
+                                        </a>
+                                        <div class="friendship">
+                                                <a href="{% url 'account:accept-friend' freq.id %}"><span class="check-friendship"> Accept <i class="fa-solid fa-check-double" style="color: green;"></i></span></a>
+                                        </div>
+                                </div>
+                        {% endfor %}
+
+                        {% endif %}
+                {% endif %}              
+                </div>
+                {% comment %} {% else %}
+                <div class="list-users">
+                        <div class="each-user">
+                                <p>No users found !</p>
+                        </div>
+                </div> {% endcomment %}
+        </h2>
+{% endblock content %}

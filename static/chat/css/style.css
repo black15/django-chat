@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        list-style: none;
+        font-family: 'Poppins';
+}
+
+/* --------------------- Home page --------------------- */
+
+.container {
+        min-height: 100vh;
+        height: 100%;        
+        background-color: rgba(224, 224, 224, 0.6);
+}
+
+header {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 10px 50px;
+        background-color: rgb(23, 17, 31);
+}
+
+.logo {
+        margin-right: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+}
+
+.logo img {
+        cursor: pointer;
+}
+
+.logo span {
+        margin-left: -5px;
+        margin-bottom: 9px;
+}
+
+.logo span a {
+        color: rgb(77, 190, 134);
+        font-size: 47px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        letter-spacing: 1px;
+}
+
+.logo form {
+        margin-left: 30px;
+        margin-bottom: 10px;
+}
+
+.logo form input {
+        width: 100px;
+        height: 45px;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: rgb(243, 243, 243);
+        font-size: 18px;
+        border-bottom: rgb(255, 255, 255) 1px solid;
+        transition: 1s;
+        padding: 7px 10px;
+}
+
+.logo form input:focus {
+        width: 300px;
+}
+
+.bars {
+        display: none;
+        cursor: pointer;
+}
+
+li, a, input[type=submit] {
+        font-family: 'Poppins', sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        color: rgb(247, 247, 247);
+        text-decoration: none;
+}
+
+.nav_links li {
+        list-style: none;
+        display: inline-block;
+        padding: 0 20px;
+}
+
+.nav_links li a i {
+        color: rgb(247, 247, 247);
+        font-size: 26px;
+        transition: all .5s ease 0s;
+}
+
+.nav_links li a i:hover {
+        color: aqua;
+}
+
+@media only screen and (max-width: 1320px) {
+        header {
+                padding: 10px 35px;
+        }
+        .logo form input {
+                width: 80px;
+                height: 45px;
+        }
+        .logo form input:focus {
+                width: 250px;
+        }
+}
+
+@media only screen and (max-width: 1100px) {
+        header {
+                padding: 10px 15px;
+        }
+        .logo form input {
+                width: 60px;
+                height: 45px;
+        }
+        .logo form input:focus {
+                width: 200px;
+        }
+}
+
+@media only screen and (max-width: 1100px) {
+        .bars {
+                display: block;
+                font-size: x-large;
+        }
+        nav {
+                position: absolute;
+                height: 0;
+                top: 80px;
+                left: 0;
+                right: 0;
+                width: 100vw;
+                background-color: rgb(23, 17, 31);
+                overflow: hidden;
+                transition: .5s;
+        }
+        nav.active {
+                height: 500px;
+                overflow: visible;
+        }
+        nav ul {
+                display: block;
+                width: fit-content;
+                margin: 80px auto 0 auto;
+                text-align: center;
+        }
+        .nav_links li {
+                display: block;
+                margin-top: 30px;
+        }
+}
+
+/* --------------------- User search --------------------- */
+/* List User Styling Section */
+.list-users {
+        width: 90%;
+        margin: 0 auto;
+        padding: 5px 10px;
+        display: flex;
+        flex-wrap: wrap;
+}
+
+.list-users .each-user {
+        background-color: rgba(255, 255, 255, 0.7);
+        margin: 10px auto;
+        padding: 10px 20px;
+        width: 600px;
+        border-radius: 20px;
+        box-shadow: 10px 10px 8px #c5c5c583;
+        transition: .2s;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+}
+.list-users .each-user:hover {
+        transform: scale(1.1);
+}
+.list-users .each-user a {
+        color: #000;
+}
+.list-users .each-user .username {
+        width: 150px;
+        text-align: center;
+        margin-bottom: 5px;
+        font-weight: 600;
+        font-size: larger;
+}
+.list-users .each-user .profile-img {
+        position: relative; 
+        width: 150px;
+        height: 150px; 
+        overflow: hidden; 
+        border-radius: 50%;
+        margin: 10px auto;
+}
+.list-users .each-user img {
+        width: 100%; 
+        height: 100%;
+}
+
+.list-users .each-user .friendship .check-friendship {
+        background-color: rgb(255, 255, 255);
+        box-shadow: 2px 8px 8px #c5c5c583;
+        padding: 5px 10px;
+        border-radius: 8px;
+        font-size: large;
+        /* display: block; */
+        width: 60%;
+        margin-bottom: 15px;
+}
+.list-users .each-user .friendship .check-friendship i {
+        color: yellowgreen;
+}
+
+.list-users .each-user .friendship .message-user {
+        font-size: large;
+        cursor: pointer;
+}
+.list-users .each-user .friendship .message-user i {
+        color: dodgerblue;
+}
+
+
+
+
+
+/* --------------------- Footer --------------------- */
+footer {  
+        position: relative;  
+        left: 0;  
+        bottom: 0px;  
+        right: 0; 
+        background-color: gray;  
+        color: white;  
+        text-align: center;  
+        }  

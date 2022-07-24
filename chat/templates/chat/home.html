@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}  Chat With Django {% endblock title %}
+
+{% block content %}
+        <h2>Welcome, {{user.username}}</h2>
+                <div class="list-users">
+                        
+                {% if users %}
+                        {% for user in users %}
+                        <div class="each-user">
+                                <a href="{% url 'account:profile' user.id %}">
+                                        <div class="username"><span>{{user.username}}</span></div>
+                                        <div class="profile-img"><img src="{{user.profile_img.url}}" alt="Profile Image"></div>
+                                </a>
+                                <div class="friendship">
+                                        {% if request.user.id == user.id %}
+                                        <span class="check-friendship" style="display: inline;">You <i class="fa-solid fa-user" style="color: dodgerblue"></i></span>
+                                        {% else %}
+                                        <span class="check-friendship">Not Friends <i class="fa-solid fa-x" style="color: red; font-size: medium;"></i></i></span><br><br>
+                                        <span class="message-user">Send a message <i class="fa-solid fa-message"></i></span>
+                                        {% endif %}
+                                </div>
+                        </div>
+                        {% endfor %}
+                {% endif %}
+                </div>
+        </h2>
+{% endblock content %}

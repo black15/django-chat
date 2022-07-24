@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  User Account
+{% endblock %}
+
+{% block header %}
+  Login
+{% endblock %}
+
+{% block content %}
+        <link rel="stylesheet" href="{% static 'account/css/user.css' %}">
+
+        <div class="main">
+                <div class="edit_form">
+                <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="email">
+                                <label for="email">Email </label><br>
+                                <input type="email" name="email" id="email" value="{{request.user.email}}">
+                        </div>
+                        <div class="username">
+                                <label for="username">Username </label><br>
+                                <input type="text" name="username" id="username" value="{{request.user.username}}">
+                        </div>
+                        <div class="profile-img">
+                                <label for="profile_img">Profile Image </label><br>
+                                <div class="image"><img src="{{request.user.profile_img.url}}" alt=""></div>
+                                <input type="file" name="profile_img" id="profile_img" value="{{request.user.profile_img.url}}">
+                        </div>
+                        <div class="bio">
+                                <label for="bio">Bio </label><br>
+                                <textarea name="bio" id="bio">{{request.user.bio}}</textarea>
+                        </div>
+                        <div class="hide_email">
+                                <label for="hide_email">Hide Email </label><br>
+                                <input type="checkbox" name="hide_email" id="hide_email" {% if request.user.hide_email %} checked {% endif %}>
+                        </div>
+                        <div class="save"><input type="submit" value="Submit"></div>
+                </form>
+                </div>
+        </div>
+{% endblock %}

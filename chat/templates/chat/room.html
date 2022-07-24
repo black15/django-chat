@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}  {{room}} room {% endblock title %}
+
+{% block content %}
+        <style>
+                .room {
+                        width: 80%;
+                        margin: 0 auto;
+                        padding: 10px 5px;
+                }
+                .room-box {
+                        padding: 10px 5px;
+                        border-radius: 8px;
+                        margin: 5px 10px;
+                }
+                .room-name {
+                        font-size: xx-large;
+                        text-transform: uppercase;
+                        text-align: center;
+                        font-weight: 600;
+                        margin-bottom: 30px;
+                }
+                .messages {
+                        overflow-y: auto;
+                        height: 600px;
+                        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+                        scrollbar-width: none;  /* Firefox */
+                }
+                .messages::-webkit-scrollbar { 
+                        display: none;  /* Safari and Chrome */
+                }
+                .message-box {
+                        width: 70%;
+                        margin: 20px auto;
+                        background-color: lightgray;
+                        padding: 10px 5px;
+                        border-radius: 8px;
+                        box-shadow: 0px 5px 11px rgba(205, 205, 205, 0.8);
+                        white-space: initial;
+                }
+                .message-box .username {
+                        margin-left: 5px;
+                        font-weight: 500;
+                }
+                .message-box .message {
+                        margin-left: 5px;
+                        margin-top: 5px;
+                }
+                .send-section {
+                        width: 70%;
+                        margin: 20px auto;
+                        background-color: #ddd;
+                        padding: 10px 5px;
+                        border-radius: 8px;
+                }
+                .send-section form {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-evenly;
+                }
+                .send-section form input {
+                        padding: 10px 5px;
+                        color: #111;
+                        font-size: medium;
+                        border: none;
+                        outline: none;
+                        background: transparent;
+                        width: 70%;
+                }
+                .send-section form button {
+                        background-color: purple;
+                        outline: none;
+                        border: none;
+                        padding: 5px 10px;
+                        font-size: medium;
+                        border-radius: 5px;
+                        cursor: pointer;
+                }
+        </style>
+
+        <div class="room">
+                <div class="room-box">
+                        <div class="room-name">{{room.name}}</div>
+                        <div class="messages">
+                                {% for msg in messages %}
+                                <div class="message-box">
+                                        <span class="username">{{msg.user.username}}</span>
+                                        <div class="message">
+                                                <p class="content" style="display: inline;">{{msg.message}}</p>
+                                                <div style="width: 80px; float: right; margin: 0 auto;"><small>{{msg.date_created |time:"H:i"}}</small></div>
+                                        </div>
+                                </div>
+                                {% endfor %}
+                        </div>
+                        <div class="send-section">
+                                {% csrf_token %}
+                                <form method="post" action="">
+                                        <input type="text" name="message" placeholder="Type something ..." id="message-input">
+                                        <button type="submit" id="send-message-btn">Send</button>
+                                </form>
+                                
+                        </div>
+                </div>
+        </div>
+        
+{% endblock content %}
+
+{% block script %}
+        {{room.slug | json_script:'json_roomslug'}}
+        {{request.user.username | json_script:'json_username'}}
+        <script>
+                const roomName = JSON.parse(
+                        document.getElementById('json_roomslug').textContent
+                );
+                const userName = JSON.parse(
+                        document.getElementById('json_username').textContent
+                );
+                const chatSocket = new WebSocket(
+                        'ws://' + window.location.host + '/ws/' + roomName + '/'
+                );
+                
+                chatSocket.addEventListener('message', function (event) {
+                        console.log('Message from server ', event.data);
+
+                        const data      = JSON.parse(event.data)
+
+                        if (data.message) {
+                                let messagebox  = '<div class="message-box">';
+                                messagebox+= '<span class="username">' + data.username + '</span>';
+                                messagebox+= '<p class="message">' + data.message + '</p></div>';
+
+                                let chatbox     = document.querySelector('.messages').innerHTML += messagebox;
+                                scrl();
+                        }
+                        else {
+                                alert('No Message (empty!)')
+                        }
+                    });
+                chatSocket.addEventListener('close', function (event) {
+                        console.log('closed ', event.data);
+                    });
+
+                // 
+
+                document.getElementById('send-message-btn').onclick = function(event) {
+                        event.preventDefault;
+                        let messageInput        = document.getElementById('message-input');
+                        let message             = messageInput.value;
+
+                        chatSocket.send(JSON.stringify({
+                                'message'       : message,
+                                'username'      : userName,
+                                'room'          : roomName
+                        }));
+
+                        messageInput.value = "";
+                        
+                        return false;
+                }
+
+                function scrl() {
+                        const msgbox            = document.querySelector('.messages');
+                        msgbox.scrollTop        = msgbox.scrollHeight;
+                }
+
+                scrl();
+                
+        </script>
+{% endblock script %}

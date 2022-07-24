@@ -1,0 +1,139 @@
+/* Main Container Styling Section */
+.main {
+        padding: 20px 40px;
+        background-color: rgba(23, 17, 31, 0.945);
+        text-align: center;
+        margin: 10px 5px;
+        color: #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 8px;
+}
+.main .profile-section {
+        width: 70%;
+        margin: 0 auto;
+}
+
+/* Profile Image Styling Section */
+.main .profile-section .profile-img {
+        display: block; 
+        position: relative; 
+        width: 200px; 
+        height: 200px; 
+        overflow: hidden; 
+        border-radius: 50%;
+        margin: 10px auto;
+}
+.main .profile-section .profile-img img {
+        width: 100%; 
+        height: 100%; 
+        /* margin-left: -50px; */
+        
+}
+
+/* Username Styling Section */
+.main .profile-section .username {
+        font-size: larger;
+        font-weight: 500;
+}
+
+/* Email Styling Section */
+.main .profile-section .email {
+        margin: 10px auto;
+}
+.main .profile-section .email span {
+        font-size: larger;
+}
+.main .profile-section .email .email-small {
+        width: 150px;
+        margin: 0 auto;
+        text-align: left;
+        color: #bbb;
+}
+
+/* Bio Styling Section */
+.main .profile-section .bio {
+        width: 40%;
+        margin: 0 auto;
+        margin-top: 15px;
+        border: #bbb 1px solid;
+        border-radius: 8px;
+        padding: 5px;
+        overflow:unset;
+
+}
+
+/* Edit Info Button Styling Section */
+.main .profile-section .edit-btn {
+        width: 40%;
+        margin: 7px auto;
+        text-align: right;
+}
+.main .profile-section .edit-btn a i {
+        font-size: larger;
+}
+
+/* Friends Styling Section */
+.main .friends {
+        width: 350px;
+        margin: 0 auto;
+        font-size: larger;
+}
+
+.main .friends .already-friends {
+        margin-bottom: 30px;
+}
+.main .friends .already-friends span, .main .friends .friend-request span {
+        background-color: rgb(23, 17, 31);
+        padding: 10px 15px;
+        border-radius: 5px;
+}
+
+.main .friends .chng-pswd {
+        margin-top: 20px;
+}
+
+
+/* --------------------- Update User Info --------------------- */
+
+/* Update Form Styling Section */
+.main .edit_form {
+        width: 90%;
+        margin: 0 auto;
+        padding: 5px 10px;
+}
+.main .edit_form div {
+        margin: 10px auto;
+        padding: 10px 20px;
+        width: 50%;
+        border-radius: 20px;
+        display: block;
+        line-height: 1.5;
+}
+.main .edit_form div input[type="text"], .main .edit_form div input[type="email"], .main .edit_form div input[type="checkbox"], .main .edit_form div textarea {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        border: none;
+        outline: none;
+        background: white;
+        padding: 10px 15px;
+        font-size: medium;
+        color: #555;
+}
+.main .edit_form div label {
+        float: left;
+        color: #eee;
+        font-weight: 500;
+}
+
+.main .edit_form div .image {
+        margin: 0 auto;
+}
+
+.main .edit_form div .image img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+}

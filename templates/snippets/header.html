@@ -1,0 +1,31 @@
+{% load static %}
+<header>
+        <div class="logo">
+                <a href="{% url 'chat:home' %}"><img src="{% static 'chat/img/django.svg' %}" alt="LOGO" width="50" height="50"></a>
+                <span><a href="{% url 'chat:home' %}">Chat</a></span>
+                {% if user.is_authenticated %}
+                <form action="{% url 'chat:search' %}" method="get">
+                        <input type="search" name="friend" id="friend" placeholder="Search for a friend ...">
+                </form>
+                {% endif %}  
+        </div>
+        <div class="bars">
+                <i class="fa-solid fa-bars" style="color: white;"></i>
+        </div>
+        <nav class="nav">
+                <ul class="nav_links">
+                        {% if request.user.is_authenticated %}
+                        
+                                <li><a href="#"><i class="fa-solid fa-bell"></i></a></li>
+                                <li><a href="{% url 'chat:list_rooms' %}"><i class="fa-solid fa-message"></i></a></li>
+                                <li><a href="{% url 'account:profile' request.user.id %}"><i class="fa-solid fa-user"></i></a></li>
+                                <li><a onmouseover="this.style.backgroundColor='#ff0000'" onmouseout="this.style.backgroundColor=''" href="{% url 'account:logout' %}"> Logout </a></li>
+
+                                
+                        {% else %}
+                                <li><a href="{% url 'account:login' %}"><span>Login</span></a></li>
+                                <li><a href="{% url 'account:register' %}"><span>Sign In</span></a></li>
+                        {% endif %}
+                </ul>
+        </nav>
+</header>

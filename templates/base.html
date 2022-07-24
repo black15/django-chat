@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'chat/css/style.css' %}">
+        <script src="{% static 'chat/js/3b4d77a96e.js' %}" crossorigin="anonymous"></script>
+        <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+        {% include 'snippets/header.html' %}
+
+        <div class="container">
+                {% block content %}
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endblock content %}
+        </div>
+</body>
+        <script>
+                bars = document.querySelector('.bars');
+                bars.onclick = function(){
+                        nav = document.querySelector('.nav');
+                        nav.classList.toggle('active');
+                }
+        </script>
+        
+        {% block script %}{% endblock script %}
+
+        {% include 'snippets/footer.html' %}
+</html>

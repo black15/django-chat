@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}  Chat | Public rooms {% endblock title %}
+
+{% block content %}
+        <style>
+                .user-rooms, .public-rooms {
+                        margin: 0 auto;
+                        padding: 5px 10px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                }
+                .room-box {
+                        background-color: gray;
+                        width: 250px;
+                        text-align: center;
+                        padding: 10px 5px;
+                        border-radius: 8px;
+                        margin: 5px 10px;
+                }
+                .room-box small {
+                        font-size: 13px;
+                        float: left;
+                        margin: 20px 10px;
+                }
+                .room-name {
+                        font-size: larger;
+                }
+
+                .public-rooms-header-text, .user-rooms-header-text {
+                        font-weight: 500;
+                        text-align: center;
+                        margin: 0 10px;
+                }
+        </style>
+
+        <div class="rooms">
+                {% if user_rooms %}
+                        <h2 class="user-rooms-header-text">Personal rooms</h2>
+                        <div class="user-rooms">
+                        {% for room in user_rooms %}
+                                <div class="room-box">
+                                        <div><span class="room-name">{{room}}</span></div>
+                                        <div><a href="{% url 'chat:join_room' room.slug %}">Join</a></div>
+                                        <div><small>Created by you</small></div>
+                                </div>
+                        {% endfor %}
+                        </div>
+                {% endif %}
+                
+
+                <h2 class="public-rooms-header-text">Public rooms</h2>
+                <div class="public-rooms">
+                        
+                {% for room in all_rooms %}
+                <div class="room-box">
+                        <div><span class="room-name">{{room}}</span></div>
+                        <div><a href="{% url 'chat:join_room' room.slug %}">Join</a></div>
+                        <div><small>Created by {{room.owner}}</small></div>
+                </div>
+                {% endfor %}
+                </div>
+
+        </div>
+
+{% endblock content %}
