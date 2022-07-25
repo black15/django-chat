@@ -1,1 +1,3 @@
-# django-chat
+# Django chat
+
+## Simple social media and Realtime group chatting  
